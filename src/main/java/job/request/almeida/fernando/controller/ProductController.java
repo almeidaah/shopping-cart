@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import job.request.almeida.fernando.model.Product;
-import job.request.almeida.fernando.repository.ProductRepository;
+import job.request.almeida.fernando.service.ProductService;
 
 @RestController
 @RequestMapping(value = "/sm/api/v1")
 public class ProductController {
 
 	@Autowired
-	private ProductRepository productRepo;
+	private ProductService productService;
 
 	/**
 	 * The Products endpoint returns information about the *McFadyen* products.
@@ -29,7 +29,7 @@ public class ProductController {
 	public ResponseEntity<List<Product>> productsGet() {
 
 		HttpHeaders httpHeaders = new HttpHeaders();
-		List<Product> products = productRepo.findAll();
+		List<Product> products = productService.findAll();
 		
 		return new ResponseEntity<List<Product>>(products, httpHeaders, HttpStatus.OK);
 	}
