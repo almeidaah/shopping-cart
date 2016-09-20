@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import job.request.almeida.fernando.model.CommerceItem;
 import job.request.almeida.fernando.model.ShoppingCart;
-import job.request.almeida.fernando.repository.CommerceItemRepository;
-import job.request.almeida.fernando.repository.ShoppingCartRepository;
+import job.request.almeida.fernando.service.CommerceItemService;
+import job.request.almeida.fernando.service.ShoppingCartService;
 
 @RestController
 @RequestMapping(value="/sm/api/v1")
 public class ShoppingCartController {
 
 	@Autowired
-	private CommerceItemRepository itemRepo;
+	private CommerceItemService commerceItemService;
 	
-	@Autowired
-	private ShoppingCartRepository shoppingCartRepo;
+	@Autowired 
+	private ShoppingCartService shoppingCartService;
 	
 	/**
 	 * Returns the current shopping cart for the session.
@@ -34,7 +34,7 @@ public class ShoppingCartController {
 	public ResponseEntity<ShoppingCart> shoppingcartGet(String id){
 
 		HttpHeaders httpHeaders = new HttpHeaders();
-		ShoppingCart shoppingCart = shoppingCartRepo.findOne(id);
+		ShoppingCart shoppingCart = shoppingCartService.findOne(id);
 		
 		return new ResponseEntity<ShoppingCart>(shoppingCart, httpHeaders, HttpStatus.OK);
 	}
@@ -47,7 +47,7 @@ public class ShoppingCartController {
 	public ResponseEntity<?> shoppingcartItemsIdDelete(@RequestParam(required=true) String id){
 
 		HttpHeaders httpHeaders = new HttpHeaders();
-		itemRepo.delete(id);
+		commerceItemService.delete(id);
 		
 		return new ResponseEntity<>("Item was removed from the shopping cart.", httpHeaders, HttpStatus.OK);
 	}
@@ -64,7 +64,7 @@ public class ShoppingCartController {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		
 		CommerceItem item = new CommerceItem(product_id, quantity);
-		itemRepo.save(item);
+		commerceItemService.save(item);
 		
 		return new ResponseEntity<>(item, httpHeaders, HttpStatus.OK);
 
