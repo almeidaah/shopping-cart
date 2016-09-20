@@ -22,7 +22,7 @@ public class ProductController {
 	private ProductService productService;
 
 	/**
-	 * The Products endpoint returns information about the *McFadyen* products.
+	 * The Products endpoint returns information about the products.
 	 * @return List<Product>
 	 */
 	@RequestMapping(value = "/products", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
