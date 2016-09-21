@@ -1,4 +1,4 @@
-package job.request.almeida.fernando.model;
+package projects.almeida.fernando.model;
 
 import java.math.BigDecimal;
 
@@ -11,8 +11,6 @@ public class CommerceItem {
 	@Id
 	private String id;
 
-	//shoppingCartId?
-	
 	private String product_id;
 	private Integer quantity;
 	private BigDecimal amount;

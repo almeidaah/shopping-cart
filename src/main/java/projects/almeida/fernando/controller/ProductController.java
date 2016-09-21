@@ -1,4 +1,4 @@
-package job.request.almeida.fernando.controller;
+package projects.almeida.fernando.controller;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import job.request.almeida.fernando.model.Product;
-import job.request.almeida.fernando.service.ProductService;
+import projects.almeida.fernando.model.Product;
+import projects.almeida.fernando.service.ProductService;
 
 @RestController
 @RequestMapping(value = "/sm/api/v1")

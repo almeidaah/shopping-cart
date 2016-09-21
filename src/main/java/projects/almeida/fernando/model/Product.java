@@ -1,4 +1,4 @@
-package job.request.almeida.fernando.model;
+package projects.almeida.fernando.model;
 
 import java.math.BigDecimal;
 

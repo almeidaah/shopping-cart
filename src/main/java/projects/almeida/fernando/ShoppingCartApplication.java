@@ -1,4 +1,4 @@
-package job.request.almeida.fernando;
+package projects.almeida.fernando;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

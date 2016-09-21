@@ -1,4 +1,4 @@
-package job.request.almeida.fernando.service;
+package projects.almeida.fernando.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import job.request.almeida.fernando.model.Product;
-import job.request.almeida.fernando.repository.ProductRepository;
+import projects.almeida.fernando.model.Product;
+import projects.almeida.fernando.repository.ProductRepository;
 
 @Service
 public class ProductService {

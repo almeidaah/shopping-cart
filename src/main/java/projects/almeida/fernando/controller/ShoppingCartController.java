@@ -1,4 +1,6 @@
-package job.request.almeida.fernando.controller;
+package projects.almeida.fernando.controller;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -10,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import job.request.almeida.fernando.model.CommerceItem;
-import job.request.almeida.fernando.model.ShoppingCart;
-import job.request.almeida.fernando.service.CommerceItemService;
-import job.request.almeida.fernando.service.ShoppingCartService;
+import projects.almeida.fernando.model.CommerceItem;
+import projects.almeida.fernando.model.ShoppingCart;
+import projects.almeida.fernando.service.CommerceItemService;
+import projects.almeida.fernando.service.ShoppingCartService;
 
 @RestController
 @RequestMapping(value="/sm/api/v1")
@@ -58,15 +60,19 @@ public class ShoppingCartController {
 	 * @param quantity
 	 */
 	@RequestMapping(value = "/shoppingcart/items", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<CommerceItem> shoppingcartItemsPost(@RequestParam(required=true) String product_id, @RequestParam(required=true) Integer quantity){
+	public ResponseEntity<CommerceItem> shoppingcartItemsPost(HttpSession httpSession, @RequestParam(required=true) String product_id, @RequestParam(required=true) Integer quantity){
 
 		//Get shoppingcart from session 
+	    	ShoppingCart shoppingCart = shoppingCartService.findOne(String.valueOf(httpSession.getAttribute("cart_id")));
 		HttpHeaders httpHeaders = new HttpHeaders();
 		
-		CommerceItem item = new CommerceItem(product_id, quantity);
-		commerceItemService.save(item);
+		CommerceItem commerceItem = new CommerceItem(product_id, quantity);
+		shoppingCart.getCommerceItems().add(commerceItem);
+
+		shoppingCartService.save(shoppingCart);
 		
-		return new ResponseEntity<>(item, httpHeaders, HttpStatus.OK);
+		
+		return new ResponseEntity<>(commerceItem, httpHeaders, HttpStatus.OK);
 
 	}
 }
