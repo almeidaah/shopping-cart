@@ -75,4 +75,20 @@ public class ShoppingCartController {
 		return new ResponseEntity<>(commerceItem, httpHeaders, HttpStatus.OK);
 
 	}
+	
+	/**
+	 * Adds an item to the shopping cart. 
+	 * @param product_id
+	 * @param quantity
+	 */
+	@RequestMapping(value = "/shoppingcart/total", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Double> getTotalShoppingCartCosts(HttpSession httpSession){
+
+		//Get shoppingcart from session 
+	    	ShoppingCart shoppingCart = shoppingCartService.findOne(String.valueOf(httpSession.getAttribute("cart_id")));
+	    	
+		HttpHeaders httpHeaders = new HttpHeaders();
+		return new ResponseEntity<Double>(shoppingCart.getTotalCosts(), httpHeaders, HttpStatus.OK);
+
+	}
 }
