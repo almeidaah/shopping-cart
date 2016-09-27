@@ -23,6 +23,7 @@ public class CommerceItem {
 		super();
 		this.product_id = product_id;
 		this.quantity = quantity;
+		this.amount = new BigDecimal(quantity * 10);
 	}
 
 

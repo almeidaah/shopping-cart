@@ -1,18 +1,24 @@
 package projects.almeida.fernando.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.ScopedProxyMode;
 
+@Component
+@Scope(proxyMode=ScopedProxyMode.TARGET_CLASS, value="session")
 public class ShoppingCart {
 
 	@Id
 	private String id;
 	
 	@DBRef
-	private List<CommerceItem> commerceItems;
+	private List<CommerceItem> commerceItems = new ArrayList<>();
 	
 	private BigDecimal amount;
 
@@ -35,7 +41,7 @@ public class ShoppingCart {
 	public Double getTotalCosts(){
 	    double totalCost = commerceItems
 		    .stream()
-		    .mapToDouble(item -> item.getQuantity() * item.getAmount().doubleValue())
+		    .mapToDouble(item -> item.getAmount().doubleValue())
 		    .sum();
 	    
 	    return totalCost;
